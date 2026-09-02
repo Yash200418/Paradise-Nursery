@@ -1,2 +1,10 @@
-import {useSelector,useDispatch} from 'react-redux';import {removeItem,updateQuantity} from '../redux/CartSlice';
-export default function CartItem(){const items=useSelector(s=>s.cart.items);const dispatch=useDispatch();const total=items.reduce((a,b)=>a+b.price*b.quantity,0);return(<div><h1>Shopping Cart</h1>{items.map(i=><div key={i.id}><img src={i.image} width='100'/><h3>{i.name}</h3><p>${i.price}</p><button onClick={()=>dispatch(updateQuantity({id:i.id,quantity:i.quantity-1}))}>-</button><span>{i.quantity}</span><button onClick={()=>dispatch(updateQuantity({id:i.id,quantity:i.quantity+1}))}>+</button><button onClick={()=>dispatch(removeItem(i.id))}>Delete</button></div>)}<h2>Total: ${total}</h2><button onClick={()=>alert('Coming Soon')}>Checkout</button><button>Continue Shopping</button></div>)}
+<Link to="/products">
+  <button>Continue Shopping</button>
+</Link>
+
+<button onClick={() => alert("Coming Soon!")}>
+  Checkout
+</button>
+
+<h2>Total Cart Amount: ${totalAmount}</h2>
+<p>Total: ${item.price * item.quantity}</p>
