@@ -1,2 +1,25 @@
-import './App.css';
-export default function App(){return(<div className='landing'><h1>Paradise Nursery</h1><button>Get Started</button></div>)}
+import "./App.css";
+import { Link } from "react-router-dom";
+
+function App() {
+  return (
+    <div className="landing-page">
+      <div className="overlay">
+        <h1>Paradise Nursery</h1>
+
+        <h3>Bring Nature Into Your Home</h3>
+
+        <p>
+          Explore our collection of indoor, medicinal, and aromatic plants for a
+          greener lifestyle.
+        </p>
+
+        <Link to="/products">
+          <button className="get-started-btn">Get Started</button>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default App;
