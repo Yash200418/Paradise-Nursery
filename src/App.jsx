@@ -7,11 +7,11 @@ function App() {
       <div className="overlay">
         <h1>Paradise Nursery</h1>
 
-        <h3>Bring Nature Into Your Home</h3>
+        <h2>Bring Nature Into Your Home</h2>
 
         <p>
-          Explore our collection of indoor, medicinal, and aromatic plants for a
-          greener lifestyle.
+          Discover beautiful indoor, medicinal, and aromatic plants for your
+          home and garden.
         </p>
 
         <Link to="/products">
