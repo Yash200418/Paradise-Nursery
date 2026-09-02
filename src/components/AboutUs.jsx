@@ -1,0 +1,1 @@
+export default function AboutUs(){return(<div><h2>About Paradise Nursery</h2><p>Paradise Nursery provides healthy indoor, medicinal and aromatic plants at affordable prices.</p></div>)}
