@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 
 function CartItem() {
   const dispatch = useDispatch();
-
-  // Get cart data from Redux
   const cartItems = useSelector((state) => state.cart.items);
-  const totalAmount = useSelector((state) => state.cart.totalAmount);
 
-  // Increase quantity
+  const totalAmount = cartItems.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
+
   const increaseQuantity = (item) => {
     dispatch(
       updateQuantity({
@@ -20,39 +21,69 @@ function CartItem() {
     );
   };
 
-  // Decrease quantity
   const decreaseQuantity = (item) => {
-    dispatch(
-      updateQuantity({
-        id: item.id,
-        quantity: item.quantity - 1,
-      })
-    );
+    if (item.quantity > 1) {
+      dispatch(
+        updateQuantity({
+          id: item.id,
+          quantity: item.quantity - 1,
+        })
+      );
+    }
   };
 
-  // Remove item
   const deleteItem = (id) => {
     dispatch(removeItem(id));
   };
 
-  // Empty cart message
-  if (cartItems.length === 0) {
-    return (
-      <div style={{ textAlign: "center", padding: "40px" }}>
-        <h1>Your Shopping Cart</h1>
-        <h3>Your cart is empty.</h3>
-
-        <Link to="/products">
-          <button style={buttonStyle}>Continue Shopping</button>
-        </Link>
-      </div>
-    );
-  }
-
   return (
-    <div style={{ padding: "20px" }}>
-      <h1 style={{ textAlign: "center", color: "green" }}>
-        Shopping Cart
-      </h1>
+    <div className="cart-container">
+      <h1>Shopping Cart</h1>
 
-      {cartItems.map((item) => (
+      <h2>Total Cart Amount: ${totalAmount}</h2>
+
+      {cartItems.length === 0 ? (
+        <h3>Your cart is empty.</h3>
+      ) : (
+        cartItems.map((item) => (
+          <div className="cart-item" key={item.id}>
+            <img src={item.image} alt={item.name} width="120" />
+
+            <div className="cart-info">
+              <h3>{item.name}</h3>
+
+              <p>Unit Price: ${item.price}</p>
+
+              <p>Quantity: {item.quantity}</p>
+
+              <p>Total Cost: ${item.price * item.quantity}</p>
+
+              <button onClick={() => increaseQuantity(item)}>+</button>
+
+              <button onClick={() => decreaseQuantity(item)}>-</button>
+
+              <button onClick={() => deleteItem(item.id)}>
+                Delete
+              </button>
+            </div>
+          </div>
+        ))
+      )}
+
+      <br />
+
+      <button onClick={() => alert("Coming Soon")}>
+        Checkout
+      </button>
+
+      <br />
+      <br />
+
+      <Link to="/products">
+        <button>Continue Shopping</button>
+      </Link>
+    </div>
+  );
+}
+
+export default CartItem;
